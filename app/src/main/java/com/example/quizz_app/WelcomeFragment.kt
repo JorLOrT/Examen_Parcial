@@ -3,6 +3,7 @@ package com.example.quizz_app
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 
@@ -20,7 +21,9 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
     fun eventos(view: View){
         val btnComenzar = view.findViewById<Button>(R.id.comenzar)
         btnComenzar.setOnClickListener {
-            view.findNavController().navigate(R.id.action_welcomeFragment_to_questionFragment)
+            val posicion = 1
+            val resultadoClic = bundleOf( "posicion" to posicion)
+            view.findNavController().navigate(R.id.action_welcomeFragment_to_questionFragment, resultadoClic)
         }
     }
 

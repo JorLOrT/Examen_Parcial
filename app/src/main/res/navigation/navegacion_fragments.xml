@@ -27,5 +27,9 @@
         android:id="@+id/answerFragment"
         android:name="com.example.quizz_app.AnswerFragment"
         android:label="fragment_answer"
-        tools:layout="@layout/fragment_answer" />
+        tools:layout="@layout/fragment_answer" >
+        <action
+            android:id="@+id/action_answerFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
+    </fragment>
 </navigation>

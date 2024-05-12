@@ -2,7 +2,6 @@ package com.example.quizz_app
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.os.bundleOf
@@ -12,13 +11,10 @@ import androidx.navigation.findNavController
 class QuestionFragment : Fragment(R.layout.fragment_question) {
 
     var posicion: Int = 1
-
     lateinit var listaPreguntas: ArrayList<Pregunta>
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,30 +27,32 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
         val opcion3: TextView = view.findViewById(R.id.tv_option_three)
         val opcion4: TextView = view.findViewById(R.id.tv_option_four)
 
+        arguments.let{bundle ->
+            posicion = bundle?.getInt("posicion").toString().toInt()
+        }
 
         opcion1.setOnClickListener{onCLick(1, view)}
         opcion2.setOnClickListener{onCLick(2, view)}
         opcion3.setOnClickListener{onCLick(3, view)}
         opcion4.setOnClickListener{onCLick(4, view)}
 
-        crearPregunta(view, tv_pregunta, opcion1, opcion2, opcion3, opcion4)
-
+        crearPregunta(view, tv_pregunta, opcion1, opcion2, opcion3, opcion4, posicion)
     }
 
     private fun onCLick(respuesta: Int, view: View) {
-        val esCorrecto: Boolean
+        val esCorrecto: String
         val pregunta: Pregunta = listaPreguntas[posicion - 1]
         if(pregunta.respuesta != respuesta) {
-            esCorrecto = false
+            esCorrecto = "no"
         }else {
-            esCorrecto = true
+            esCorrecto = "si"
         }
-        val resultadoClic = bundleOf("respuesta" to esCorrecto)
+        val resultadoClic = bundleOf("respuesta" to esCorrecto, "posicion" to posicion)
         view.findNavController().navigate(R.id.action_questionFragment_to_answerFragment, resultadoClic)
     }
 
     // GENERADOR DE PREGUNTAS
-    private fun crearPregunta(view: View, tv_pregunta: TextView, opcion1: TextView,opcion2: TextView, opcion3: TextView, opcion4: TextView) {
+    private fun crearPregunta(view: View, tv_pregunta: TextView, opcion1: TextView,opcion2: TextView, opcion3: TextView, opcion4: TextView, posicion: Int) {
         val pregunta: Pregunta = listaPreguntas[posicion - 1]
         tv_pregunta.text = pregunta.pregunta
         opcion1.text = pregunta.opcion1
@@ -68,6 +66,6 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
         // Actualiza el texto que aparece al lado de la barra de progreso
         val tv_progreso: TextView = view.findViewById(R.id.tv_progress)
         tv_progreso.text = "$posicion/${barra.max}"
-
     }
+
 }
