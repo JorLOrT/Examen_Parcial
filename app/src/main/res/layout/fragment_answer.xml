@@ -33,6 +33,8 @@
         android:layout_height="wrap_content"
         android:text="@string/rellenador"
         android:textSize="18sp"
+        android:textAlignment="center"
+        android:padding="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_continuar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

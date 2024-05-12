@@ -53,16 +53,13 @@ class AnswerFragment : Fragment(R.layout.fragment_answer) {
                 view.findNavController().navigate(R.id.action_answerFragment_to_resultadosFragment, resultadoClic)
             }
         }
-        else btn_continuar.text ="Siguiente"
-        btn_continuar.setOnClickListener {
-            posicion++
-            val resultadoClic = bundleOf("posicion" to posicion, "aciertos" to aciertos)
-            view.findNavController().navigate(R.id.action_answerFragment_to_questionFragment, resultadoClic)
+        else{
+            btn_continuar.text ="Siguiente"
+            btn_continuar.setOnClickListener {
+                posicion++
+                val resultadoClic = bundleOf("posicion" to posicion, "aciertos" to aciertos)
+                view.findNavController().navigate(R.id.action_answerFragment_to_questionFragment, resultadoClic)
+            }
         }
     }
-
-    fun terminarQUiz(){
-
-    }
-
 }
