@@ -17,15 +17,16 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // Llama a la función eventos para manejar los clics en los botones
         eventos(view)
         val logo:ImageView = view.findViewById<ImageView>(R.id.logo)
         logo.setImageResource(R.drawable.dbz_logo)
-        // Iniciar musica
+        // Reproduce música de fondo
         var media_player1 = MediaPlayer.create(context,R.raw.chala_head_chala)
         media_player1.start()
     }
 
-    //Funcion para cambiar de Fragment
+    // Función para manejar los clics en los botones y navegar al siguiente fragmento
     fun eventos(view: View){
         val btnComenzar = view.findViewById<Button>(R.id.comenzar)
         btnComenzar.setOnClickListener {
