@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 class QuestionFragment : Fragment(R.layout.fragment_question) {
 
     var posicion: Int = 1
+    var aciertos: Int = 0
     lateinit var listaPreguntas: ArrayList<Pregunta>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +30,7 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
 
         arguments.let{bundle ->
             posicion = bundle?.getInt("posicion").toString().toInt()
+            aciertos = bundle?.getInt("aciertos").toString().toInt()
         }
 
         opcion1.setOnClickListener{onCLick(1, view)}
@@ -46,8 +48,9 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
             esCorrecto = "no"
         }else {
             esCorrecto = "si"
+            aciertos++
         }
-        val resultadoClic = bundleOf("respuesta" to esCorrecto, "posicion" to posicion)
+        val resultadoClic = bundleOf("respuesta" to esCorrecto, "posicion" to posicion, "aciertos" to aciertos)
         view.findNavController().navigate(R.id.action_questionFragment_to_answerFragment, resultadoClic)
     }
 
