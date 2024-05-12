@@ -9,7 +9,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contenedor_fragment"
-        android:name="com.example.quizz_app.WelcomeFragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/navegacion_fragments"
+        app:defaultNavHost="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
