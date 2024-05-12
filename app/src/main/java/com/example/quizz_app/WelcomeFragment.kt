@@ -1,5 +1,6 @@
 package com.example.quizz_app
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -19,8 +20,12 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
         eventos(view)
         val logo:ImageView = view.findViewById<ImageView>(R.id.logo)
         logo.setImageResource(R.drawable.dbz_logo)
+        // Iniciar musica
+        var media_player1 = MediaPlayer.create(context,R.raw.chala_head_chala)
+        media_player1.start()
     }
 
+    //Funcion para cambiar de Fragment
     fun eventos(view: View){
         val btnComenzar = view.findViewById<Button>(R.id.comenzar)
         btnComenzar.setOnClickListener {

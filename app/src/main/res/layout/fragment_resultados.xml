@@ -7,7 +7,6 @@
     tools:context=".ResultadosFragment"
     android:background="@color/azul">
 
-
     <ImageView
         android:id="@+id/logoDBZ"
         android:layout_width="267dp"
