@@ -20,7 +20,7 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // Inicializa la lista de preguntas
         listaPreguntas = ListaPreguntas.getQuestions()
         val tv_pregunta: TextView = view.findViewById(R.id.tv_question)
         val opcion1: TextView = view.findViewById(R.id.tv_option_one)
@@ -28,6 +28,7 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
         val opcion3: TextView = view.findViewById(R.id.tv_option_three)
         val opcion4: TextView = view.findViewById(R.id.tv_option_four)
 
+        // Recupera la posición y el número de respuestas correctas del bundle
         arguments.let{bundle ->
             posicion = bundle?.getInt("posicion").toString().toInt()
             aciertos = bundle?.getInt("aciertos").toString().toInt()
@@ -38,6 +39,7 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
         opcion3.setOnClickListener{onCLick(3, view)}
         opcion4.setOnClickListener{onCLick(4, view)}
 
+        // Muestra la pregunta actual y las opciones de respuesta
         crearPregunta(view, tv_pregunta, opcion1, opcion2, opcion3, opcion4, posicion)
     }
 
@@ -51,13 +53,16 @@ class QuestionFragment : Fragment(R.layout.fragment_question) {
             aciertos++
         }
         val resultadoClic = bundleOf("respuesta" to esCorrecto, "posicion" to posicion, "aciertos" to aciertos)
+        // Navega al AnswerFragment
         view.findNavController().navigate(R.id.action_questionFragment_to_answerFragment, resultadoClic)
     }
 
     // GENERADOR DE PREGUNTAS
     private fun crearPregunta(view: View, tv_pregunta: TextView, opcion1: TextView,opcion2: TextView, opcion3: TextView, opcion4: TextView, posicion: Int) {
         val pregunta: Pregunta = listaPreguntas[posicion - 1]
+        // Establece el texto de la pregunta
         tv_pregunta.text = pregunta.pregunta
+        // Establece el texto para cada opción de respuesta
         opcion1.text = pregunta.opcion1
         opcion2.text = pregunta.opcion2
         opcion3.text = pregunta.opcion3
